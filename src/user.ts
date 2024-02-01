@@ -19,10 +19,11 @@ router.get('/user', async (req: Request, res: Response) => {
 
 //POST
 router.post('/addUser', async (req: Request, res: Response) => {
+    console.log(req);
     try {
         let name: string = req.body.name;
         let age: number = req.body.age;
-        let role = req.body.Role;
+        let role = req.body.role;
         let email: string = req.body.email;
 
         let user = await prisma.user.create({

@@ -28,10 +28,11 @@ router.get('/user', (req, res) => __awaiter(void 0, void 0, void 0, function* ()
 }));
 //POST
 router.post('/addUser', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log(req);
     try {
         let name = req.body.name;
         let age = req.body.age;
-        let role = req.body.Role;
+        let role = req.body.role;
         let email = req.body.email;
         let user = yield prisma.user.create({
             data: {
@@ -45,6 +46,7 @@ router.post('/addUser', (req, res) => __awaiter(void 0, void 0, void 0, function
     }
     catch (error) {
         console.log(error);
+        res.status(500).send("Internal Server Error");
     }
 }));
 //PUT
