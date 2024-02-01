@@ -43,9 +43,9 @@ router.post('/addUser', async (req: Request, res: Response) => {
 export = router;
 
 //PUT
-router.put('/updateUser/:userID', async (req: Request, res: Response) => {
+router.put('/updateUser/userID', async (req: Request, res: Response) => {
     const userID: string = req.params.userID; 
-    
+    console.log(req);
     try {
         const existingUser = await prisma.user.findUnique({
             where: {
@@ -78,7 +78,7 @@ router.put('/updateUser/:userID', async (req: Request, res: Response) => {
 })
 
 //DELETE
-router.delete('/deleteUser/:userID', async (req: Request, res: Response) => {
+router.delete('/deleteUser/userID', async (req: Request, res: Response) => {
     const userID: string = req.params.userID; //we are using uuid
 
     try {
