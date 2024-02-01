@@ -38,41 +38,42 @@ router.post('/addUser', async (req: Request, res: Response) => {
         console.log(error)
     }
 })
-// Change module.exports to export
 export = router;
 
-//PUT //we are using uuid
+//PUT
+router.put('/updateUser/:userID', async (req: Request, res: Response) => {
+    const userID: string = req.params.userID; 
+    
+    try {
+        const existingUser = await prisma.user.findUnique({
+            where: {
+                id: userID
+            }
+        })
 
-// router.put('/updateUser/:userID', async (req: Request, res: Response) => {
-//     const userID: string = req.params.userID; 
-//     try {
-//         const existingUser = await prisma.user.findUnique({
-//             where: {
-//                 id: userID
-//             }
-//         })
+        if (!existingUser) {
+            return res.status(404).send("user not found");
+        }
 
-//         if (!existingUser) {
-//             return res.status(404).send("user not found");
-//         }
+        const { name, age, role, email } = req.body;
 
-//         const { name, age, role, email } = req.body;
-
-//         const updatedUser = await prisma.user.update({
-//             where: {
-//                 id: userID
-//             },
-//             data: {
-
-//             }
-
-//             res.send(updatedUser);
-//         })
-//     } catch(error) {
-//         console.log(error);
-//         res.status(500).send("Internal Server error");
-//     }
-// })
+        const updatedUser = await prisma.user.update({
+            where: {
+                id: userID
+            },
+            data: {
+                name: name,
+                age: age,
+                role: role,
+                email: email
+            },
+        })
+        res.send(updatedUser);
+    } catch(error) {
+        console.log(error);
+        res.status(500).send("Internal Server error");
+    }
+})
 
 //DELETE
 router.delete('/deleteUser/:userID', async (req: Request, res: Response) => {

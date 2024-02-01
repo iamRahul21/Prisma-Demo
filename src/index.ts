@@ -1,4 +1,4 @@
-import express, {Request, Response} from 'express'; // or we can write const express = require('express')
+import express, {Request, Response} from 'express';
 import user from './user';
 
 const app = express();
