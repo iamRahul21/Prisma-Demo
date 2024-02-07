@@ -16,7 +16,7 @@ const prisma = new client_1.PrismaClient();
 const express_1 = __importDefault(require("express"));
 const router = express_1.default.Router();
 //GET
-router.get('/user', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+router.get('/get', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         let users = yield prisma.user.findMany();
         res.send(users);
@@ -50,8 +50,9 @@ router.post('/addUser', (req, res) => __awaiter(void 0, void 0, void 0, function
     }
 }));
 //PUT
-router.put('/updateUser/:userID', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+router.put('/updateUser/userID', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const userID = req.params.userID;
+    console.log(req);
     try {
         const existingUser = yield prisma.user.findUnique({
             where: {
@@ -81,7 +82,7 @@ router.put('/updateUser/:userID', (req, res) => __awaiter(void 0, void 0, void 0
     }
 }));
 //DELETE
-router.delete('/deleteUser/:userID', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+router.delete('/deleteUser/userID', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const userID = req.params.userID; //we are using uuid
     try {
         const existingUser = yield prisma.user.findUnique({

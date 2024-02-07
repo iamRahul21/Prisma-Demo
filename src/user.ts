@@ -7,7 +7,7 @@ const router = express.Router();
 
 
 //GET
-router.get('/user', async (req: Request, res: Response) => {
+router.get('/get', async (req: Request, res: Response) => {
     try {
         let users = await prisma.user.findMany();
         res.send(users);
